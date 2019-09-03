@@ -11,4 +11,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @Version 1.0
  **/
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
+
+    Product selectByitemCode(String itemCode);
 }

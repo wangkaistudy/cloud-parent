@@ -24,4 +24,7 @@ public interface UserServcie {
 
     @GetMapping("users/{id}")
     UserDto load(@PathVariable("id") Long id);
+
+
+
 }

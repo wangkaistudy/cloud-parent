@@ -11,10 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -56,6 +53,17 @@ public class ProductEndpoint {
     public Product detail(@PathVariable Long id){
       return this.productRepository.findById(id).get();
     }
+
+
+    /**
+     * 获取商品列表
+     * @return
+     */
+    @GetMapping("/detail")
+    public Product list(@RequestParam String itemCode) {
+        return this.productRepository.r;
+    }
+
     /**
     * 获取指定商品的评论列表
     * @param id 商品的ID
