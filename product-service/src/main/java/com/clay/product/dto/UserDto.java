@@ -1,6 +1,8 @@
 package com.clay.product.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -12,6 +14,8 @@ import lombok.ToString;
  **/
 @Data
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 
 
@@ -29,6 +33,9 @@ public class UserDto {
 
     private Integer userServicePort;
 
-
-
+    public UserDto(Long id, String nickname, String avatar) {
+        this.id = id;
+        this.nickname = nickname;
+        this.avatar = avatar;
+    }
 }

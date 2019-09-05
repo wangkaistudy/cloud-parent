@@ -1,5 +1,6 @@
 package com.clay.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import lombok.Data;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Table(name = "tbProduct")
 @Data
 @ToString
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

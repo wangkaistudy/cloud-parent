@@ -3,6 +3,7 @@ package com.clay.product.api;
 import com.clay.product.dao.ProductCommentRepository;
 import com.clay.product.dao.ProductRepository;
 import com.clay.product.dto.ProductCommentDto;
+import com.clay.product.dto.UserDto;
 import com.clay.product.entity.Product;
 import com.clay.product.entity.ProductComment;
 import com.clay.product.service.UserServcie;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -60,8 +62,18 @@ public class ProductEndpoint {
      * @return
      */
     @GetMapping("/detail")
-    public Product list(@RequestParam String itemCode) {
-        return this.productRepository.r;
+    public Product detailByName(@RequestParam String name) {
+
+        Product product = new Product();
+        product.setName(name);
+        List<Product> all = this.productRepository.findAll(Example.of(product));
+        if (all.isEmpty()){
+            Product one = this.productRepository.getOne(1L);
+            logger.info(one.toString());
+
+            return one;
+        }
+        return all.get(0);
     }
 
     /**
@@ -84,5 +96,18 @@ public class ProductEndpoint {
           return dto;
       }).collect(Collectors.toList());
   }
+
+
+    @RequestMapping(value = "/loadUser", method = RequestMethod.GET)
+    public UserDto load(@RequestParam Long id){
+        return this.userServcie.load(id);
+    }
+
+
+    @RequestMapping(value = "/findAllUser", method = RequestMethod.GET)
+    public List<UserDto> findAllUser(@RequestParam Long id){
+        return this.userServcie.findAll();
+    }
+
 
 }

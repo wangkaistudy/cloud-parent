@@ -1,7 +1,9 @@
 package com.clay.user.controller;
 
 import com.clay.user.dto.UserDto;
+import com.clay.user.entity.Product;
 import com.clay.user.entity.User;
+import com.clay.user.service.ProductService;
 import com.clay.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
 
     @Value("${server.port}")
     private Integer servicePort;
@@ -63,6 +68,10 @@ public class UserController {
     public boolean delete(@PathVariable Long id) {
         this.userService.delete(id);
         return true;
+    }
+    @GetMapping(value = "/productDetail")
+    public Product productDetail(@RequestParam String name){
+        return productService.loadByName(name);
     }
 }
 
